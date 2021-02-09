@@ -11,4 +11,4 @@ jobs:
       - uses: actions/checkout@v1
       - name: run zap
         if: always()
-        run: zap-baseline.py -t http://localhost/index.php 
+        run: zap-baseline.py -t https://www.google.it/
