@@ -1,14 +1,19 @@
-##boh
-name: ZAP
-on: push
+on: [push]
+
 jobs:
-  build:
+  zap_scan:
     runs-on: ubuntu-latest
-    container:
-      image: owasp/zap2docker-stable
-      options: --user root
+    name: Scan the webapplication
     steps:
-      - uses: actions/checkout@v1
-      - name: run zap
-        if: always()
-        run: zap-baseline.py -t https://www.google.it/
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.4.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://www.zaproxy.org'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
