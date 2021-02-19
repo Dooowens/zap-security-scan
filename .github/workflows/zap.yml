@@ -3,7 +3,7 @@ on: [push]
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
-    name: Scan ZAP website
+    name: Scan website
     steps:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.3.0
